@@ -16,8 +16,7 @@ def ftpUpload():
     USERNAME = "Frankom"
     PASSWORD = "123"
     IPAddr = requests.get("https://api.ipify.org/?format=json").json()['ip']
-    filename2 = os.path.join('file-'+IPAddr)
-    #filename = 'file'+'-'+IPAddr
+    filename2 = 'file-'+IPAddr
     ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD)
     with open(filename, 'rb') as f:
         ftp_server.storbinary(f"APPE {filename2}", f)
